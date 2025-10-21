@@ -23,15 +23,15 @@ type FormProps = {
 };
 
 export const ArticleParamsForm = ({ onChange }: FormProps) => {
-	const [isOpen, setIsOpen] = useState(false);
+	const [isMenuOpen, setIsMenuOpen] = useState(false);
 	const [params, setParams] = useState<ArticleStateType>(defaultArticleState);
 	const asideRef = useRef<HTMLElement>(null);
 
 	const handleClick = () => {
-		setIsOpen(!isOpen);
+		setIsMenuOpen(!isMenuOpen);
 	};
 
-	useOutsideClickClose(asideRef, isOpen, () => setIsOpen(false));
+	useOutsideClickClose(asideRef, isMenuOpen, () => setIsMenuOpen(false));
 
 	const handleReset = () => {
 		setParams(defaultArticleState);
@@ -44,11 +44,11 @@ export const ArticleParamsForm = ({ onChange }: FormProps) => {
 
 	return (
 		<>
-			<ArrowButton isOpen={isOpen} onClick={handleClick} />
+			<ArrowButton isOpen={isMenuOpen} onClick={handleClick} />
 			<aside
 				ref={asideRef}
 				className={
-					isOpen
+					isMenuOpen
 						? `${styles.container} ${styles.container_open}`
 						: styles.container
 				}>

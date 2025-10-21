@@ -6,9 +6,9 @@ export const useOutsideClickClose = (
 	onClose: () => void
 ) => {
 	useEffect(() => {
+		if (!isOpen) return;
 		const handleClickOutside = (event: MouseEvent) => {
 			if (
-				isOpen &&
 				ref.current &&
 				event.target instanceof Node &&
 				!ref.current.contains(event.target)
@@ -17,10 +17,8 @@ export const useOutsideClickClose = (
 			}
 		};
 
-		// Добавляем слушатель событий на document
 		document.addEventListener('mousedown', handleClickOutside);
 
-		// Удаляем слушатель при размонтировании компонента
 		return () => {
 			document.removeEventListener('mousedown', handleClickOutside);
 		};
